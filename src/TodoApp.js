@@ -10,14 +10,12 @@ import Grid from "@material-ui/core/Grid";
 import uuid from "uuid/v4";
 
 function TodoApp() {
-  const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
+  const initialTodos = [{id:1, task: "Complete the React Hooks Project"}];
   const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
     initialTodos
   );
 
-  useEffect(() => {
-    window.localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+
 
   return (
     <Paper
