@@ -26,3 +26,5 @@ export { useLocalStorageReducer };
 //then set up useEffect Hook, sync to localStorage whenever state changes
 
 //this Hook can be used anytime using useReducer and want changes to persist in localStorage
+
+
