@@ -1,6 +1,6 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
 import todoReducer from "../reducers/todo.reducer";
-
+import { useLocalStorageReducer } from "../hooks/useLocalStorageReducer";
 import useTodoState from "../hooks/useTodoState"; //gives the HOOK
 
 const defaultTodos = [
@@ -13,7 +13,11 @@ export const DispatchContext = createContext();
 
 export function TodosProvider(props) {
   // const {todos, addTodo, removeTodo, toggleTodo, editTodo} = useTodoState(defaultTodos);
-  const [todos, dispatch] = useReducer(todoReducer, defaultTodos);
+  const [todos, dispatch] = useLocalStorageReducer(
+    "todos",
+    defaultTodos,
+    todoReducer
+  );
   return (
     <TodosContext.Provider value={todos}>
       <DispatchContext.Provider value={dispatch}>
@@ -26,3 +30,5 @@ export function TodosProvider(props) {
 //so created TodosProvider, which calls useTodoState() to set up initial info in this obj
 //pass that in as value for TodosContext.Provider
 //return <TodosContext.Provider> WRAPPER
+
+
