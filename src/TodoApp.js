@@ -12,10 +12,10 @@ import uuid from "uuid/v4";
 import { TodosProvider } from "./context/todos.context";
 
 function TodoApp() {
-  const initialTodos = [{ id: 1, task: "Complete the React Hooks Project" }];
-  const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
-    initialTodos
-  );
+  // const initialTodos = [{ id: 1, task: "Complete the React Hooks Project" }];
+  // const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
+  //   initialTodos
+  // );
 
   return (
     <Paper
@@ -35,13 +35,8 @@ function TodoApp() {
       <Grid container justify="center" style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
           <TodosProvider>
-            <TodoForm addTodo={addTodo} />
-            <TodoList
-              todos={todos}
-              removeTodo={removeTodo}
-              toggleTodo={toggleTodo}
-              editTodo={editTodo}
-            />
+            <TodoForm />
+            <TodoList />
           </TodosProvider>
         </Grid>
       </Grid>

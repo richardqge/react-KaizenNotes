@@ -1,4 +1,6 @@
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
+import todoReducer from "../reducers/todo.reducer";
+
 import useTodoState from "../hooks/useTodoState"; //gives the HOOK
 
 const defaultTodos = [
@@ -7,15 +9,20 @@ const defaultTodos = [
 ];
 export const TodosContext = createContext();
 
+export const DispatchContext = createContext();
+
 export function TodosProvider(props) {
   // const {todos, addTodo, removeTodo, toggleTodo, editTodo} = useTodoState(defaultTodos);
-  const todosStuff = useTodoState(defaultTodos); //does the same thing
+  const [todos, dispatch] = useReducer(todoReducer, defaultTodos);
   return (
-    <TodosContext.Provider value={{ todosStuff }}>
-      {props.children}
+    <TodosContext.Provider value={todos}>
+      <DispatchContext.Provider value={dispatch}>
+        {props.children}
+      </DispatchContext.Provider>
+      {/* so this allows us to wrap context in <TodoProvider> w/o making new component */}
     </TodosContext.Provider>
   );
 }
 //so created TodosProvider, which calls useTodoState() to set up initial info in this obj
-//pass that in as value for TodosContext.Provider 
-//return <TodosContext.Provider> WRAPPER 
+//pass that in as value for TodosContext.Provider
+//return <TodosContext.Provider> WRAPPER
